@@ -39,9 +39,7 @@ export const appRouter = router({
 
     const billingUrl = absoluteUrl("/dashboard/billing");
 
-    if (!userId) {
-      throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
-    }
+    if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
 
     const dbUser = await db.user.findFirst({
       where: {
@@ -49,9 +47,7 @@ export const appRouter = router({
       },
     });
 
-    if (!dbUser) {
-      throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
-    }
+    if (!dbUser) throw new TRPCError({ code: "UNAUTHORIZED" });
 
     const subscriptionPlan = await getUserSubscriptionPlan();
 
@@ -70,16 +66,16 @@ export const appRouter = router({
       payment_method_types: ["card"],
       mode: "subscription",
       billing_address_collection: "auto",
-      line_items:[
+      line_items: [
         {
-          price: PLANS.find((plan) => plan.name === 'Pro')?.price.priceIds.test,
+          price: PLANS.find((plan) => plan.name === "Pro")?.price.priceIds.test,
           quantity: 1,
-        }
+        },
       ],
-      metadata:{
+      metadata: {
         userId: userId,
-      }
-    })
+      },
+    });
 
     return { url: stripeSession.url };
   }),
