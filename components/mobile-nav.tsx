@@ -14,7 +14,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
 
   useEffect(() => {
     if (isOpen) toggleOpen();
-  }, [pathname, isOpen]);
+  }, [pathname]);
 
   const closeOnCurrent = (href: string) => {
     if (pathname === href) {
@@ -37,7 +37,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                 <li>
                   <Link
                     onClick={() => closeOnCurrent("/sign-up")}
-                    className="flex items-center w-full font-semibold text-green-600"
+                    className="flex items-center w-full font-semibold text-blue-600"
                     href="/sign-up"
                   >
                     Get started

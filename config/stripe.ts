@@ -1,6 +1,6 @@
 export const PLANS = [
   {
-    name: "free",
+    name: "Free",
     slug: "free",
     quota: 10,
     pagePerPdf: 5,
